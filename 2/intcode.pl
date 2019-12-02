@@ -16,7 +16,7 @@ for(my $i = 0; $i < scalar @instructions; $i+=4)
 	{
 		$i = $#instructions;
 	}
-	if($instructions[$i] eq "1")
+	elsif($instructions[$i] eq "1")
 	{
 		@instructions = @{ add(\@instructions, $i) };
 	}
