@@ -2,12 +2,6 @@ use warnings;
 use strict;
 use v5.10;
 
-# my $test = "1,9,10,3,2,3,11,0,99,30,40,50";
-my $test_add = "1,0,0,0,99";
-my $test_multiply = "2,3,0,3,99";
-my $test_multiply2 = "2,4,4,5,99,0";
-my $test = "1,1,1,4,99,5,6,0,99";
-
 my @baseMemory = parseInput("input.txt");
 
 for(my $noun = 0; $noun <= 99; $noun++)
@@ -35,8 +29,6 @@ sub parseInstructions
 	$instructions->[1] = $noun;
 	$instructions->[2] = $verb;
 	
-	warn "$instructions->[0]   $instructions->[1]   $instructions->[2]";
-
 	for(my $i = 0; $i < scalar @{ $instructions }; $i+=4)
 	{
 		if($instructions->[$i] eq "99")
