@@ -10,7 +10,7 @@ my $test = "1,1,1,4,99,5,6,0,99";
 
 my @instructions = parseInput("input.txt");
 
-for(my $i = 0; $i < scalar @instructions; $i++)
+for(my $i = 0; $i < scalar @instructions; $i+=4)
 {
 	if($instructions[$i] eq "99")
 	{
@@ -19,12 +19,14 @@ for(my $i = 0; $i < scalar @instructions; $i++)
 	if($instructions[$i] eq "1")
 	{
 		@instructions = @{ add(\@instructions, $i) };
-		$i+=4;
 	}
-	if($instructions[$i] eq "2")
+	elsif($instructions[$i] eq "2")
 	{
 		@instructions = @{ multiply(\@instructions, $i) };
-		$i+=4;
+	}
+	else
+	{
+		warn "What? Found op code $instructions[$i]";
 	}
 }
 
