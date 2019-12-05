@@ -8,54 +8,58 @@ my @test_add = split(/,/, "0001,1,4,5,99,0");
 my @test_io = split(/,/, "3,7,4,6,4,7,99,420");
 my @test_multi = split(/,/, "3,3,1002,12,12,10,4,10,99,420");
 
-# my @instructions = parseInput("input.txt");
+my @instructions = parseInput("input.txt");
 my $input = 1;
 
+# my $pointerIncrement = 4;
+# for(my $i = 0; $i < scalar @test; $i+=$pointerIncrement)
+# {
+	# if($test[$i] eq "99")
+	# {
+		# $i = $#test;
+	# }
+	# elsif($test[$i] =~ /[12]$/)
+	# {
+		# @test = @{ parseArithmetic(\@test, $i) };
+		# $pointerIncrement = 4;
+	# }
+	# elsif($test[$i] =~ /[34]$/)
+	# {
+		# @test = @{ parseIO(\@test, $i, $input) };
+		# $pointerIncrement = 2;
+	# }
+	# else
+	# {
+		# warn "What? Found op code $test[$i]";
+		# continue;
+	# }
+# }
+
 my $pointerIncrement = 4;
-for(my $i = 0; $i < scalar @test; $i+=$pointerIncrement)
+for(my $i = 0; $i < scalar @instructions; $i+=$pointerIncrement)
 {
-	if($test[$i] eq "99")
+	if($instructions[$i] eq "99")
 	{
-		$i = $#test;
+		$i = $#instructions;
 	}
-	elsif($test[$i] =~ /[12]$/)
+	elsif($instructions[$i] =~ /[12]$/)
 	{
-		@test = @{ parseArithmetic(\@test, $i) };
+		@instructions = @{ parseArithmetic(\@instructions, $i) };
 		$pointerIncrement = 4;
 	}
-	elsif($test[$i] =~ /[34]$/)
+	elsif($instructions[$i] =~ /[34]$/)
 	{
-		@test = @{ parseIO(\@test, $i, $input) };
+		@instructions = @{ parseIO(\@instructions, $i, $input) };
 		$pointerIncrement = 2;
 	}
 	else
 	{
-		warn "What? Found op code $test[$i]";
+		warn "What? Found op code $instructions[$i]";
 		continue;
 	}
 }
 
-# for(my $i = 0; $i < scalar @instructions; $i+=4)
-# {
-	# if($instructions[$i] eq "99")
-	# {
-		# $i = $#instructions;
-	# }
-	# elsif($instructions[$i] =~ /01$/)
-	# {
-		# @instructions = @{ add(\@instructions, $i) };
-	# }
-	# elsif($instructions[$i] =~ /02$/)
-	# {
-		# @instructions = @{ multiply(\@instructions, $i) };
-	# }
-	# else
-	# {
-		# warn "What? Found op code $instructions[$i]";
-	# }
-# }
-
-print join(",", @test);
+print join(",", @instructions);
 
 sub parseArithmetic
 {
